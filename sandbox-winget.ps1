@@ -3,5 +3,3 @@
  . C:\scripts\winget-tools.ps1
  Install-Winget
  winget install git.git
-
- #

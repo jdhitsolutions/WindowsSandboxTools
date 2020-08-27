@@ -8,11 +8,12 @@ Function Start-WindowsSandbox {
     Param(
         [Parameter(Position = 0,ParameterSetName = "config",HelpMessage="Specify the path to a wsb file.")]
         [ValidateScript({Test-Path $_})]
-        [string]$Configuration = "C:\scripts\WinSandBx.wsb",
+        [string]$Configuration = "c:\scripts\WindowsSandboxTools\WinSandBx.wsb",
         [Parameter(ParameterSetName = "normal",HelpMessage="Start with no customizations.")]
-        [switch]$NoSetup,
-        [Parameter(HelpMessage = "Specify desktop resolutions as an array like 1280,1024. The default is 1280,720.")]
-        [int[]]$WindowSize = @(1280,720)
+        [switch]$NoSetup
+        #Setting the desktop resolution doesn't work as expected
+        #[Parameter(HelpMessage = "Specify desktop resolutions as an array like 1280,1024. The default is 1280,720.")]
+        #[int[]]$WindowSize = @(1280,720)
     )
 
     Write-Verbose "Starting $($myinvocation.mycommand)"
@@ -23,6 +24,12 @@ Function Start-WindowsSandbox {
     }
     else {
         Write-Verbose "Launching WindowsSandbox using configuration file $Configuration"
+
+        #create a file watcher if calling a configuration that uses it
+        if ($Configuration -match "WinSandBx") {
+            write-Verbose "Registering a temporary file system watcher"
+            &$PSScriptroot\RegisterWatcher.ps1 | Out-Null
+        }
         Invoke-Item $Configuration
     }
 
@@ -36,7 +43,3 @@ Function Start-WindowsSandbox {
     Write-Verbose "Ending $($myinvocation.mycommand)"
 }
 
-<#
-Get-WindowsOptionalFeature -online -FeatureName Containers-DisposableClientVM
-Enable-WindowsOptionalFeature -Online -FeatureName Containers-DisposableClientVM
-#>

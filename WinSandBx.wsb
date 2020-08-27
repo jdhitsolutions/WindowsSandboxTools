@@ -1,3 +1,4 @@
+<!-- call paths must be hard coded-->
 <Configuration>
     <MappedFolders>
         <MappedFolder>
@@ -16,10 +17,10 @@
     <ClipboardRedirection>True</ClipboardRedirection>
     <MemoryInMB>8192</MemoryInMB>
     <LogonCommand>
-        <Command>C:\scripts\sandbox-setup.cmd</Command>
+        <Command>C:\scripts\WindowsSandboxTools\sandbox-setup.cmd</Command>
     </LogonCommand>
 </Configuration>
 
 <!--
-https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-sandbox/windows-sandbox-configure-using-wsb-file
+see https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-sandbox/windows-sandbox-configure-using-wsb-file for more information
  -->

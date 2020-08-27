@@ -7,4 +7,5 @@ REM set execution policy first so that a setup script can be run
 powershell.exe -command "&{Set-ExecutionPolicy RemoteSigned -force}"
 
 REM Now run the true configuration script
-powershell.exe -file c:\scripts\sandbox-config.ps1
+REM C:\Scripts has been mapped to the local C:\Scripts in the WSB file
+powershell.exe -file c:\scripts\WindowsSandboxTools\sandbox-config.ps1

@@ -1,5 +1,10 @@
 #Install-VSCodeSandbox.ps1
 
+<#
+  This script will download and install the most current version of VS Code
+  and install the PowerShell extension
+#>
+
 $file = Join-Path -path $env:temp -child 'VSCodeSetup-x64.exe'
 Invoke-WebRequest -Uri "https://update.code.visualstudio.com/latest/win32-x64-user/stable" -OutFile $file -DisableKeepAlive -usebasicparsing
 

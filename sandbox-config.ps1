@@ -1,3 +1,8 @@
+#this script runs IN the Windows Sandbox
+
+$SetupPath = "C:\scripts\WindowsSandboxTools"
+
+#create a log file of the configuration process.
 Function log {
     Param(
         [string]$msg,
@@ -32,9 +37,9 @@ Start-Job {
 log "Installing Windows Terminal"
 Start-Job {Install-Module WTToolbox -force ; Install-WTRelease}
 log "Installing VSCode"
-Start-Job -FilePath c:\scripts\install-vscodesandbox.ps1
+Start-Job -FilePath (Join-Path -path $SetupPath -childpath install-vscodesandbox.ps1)
 log "Configuring desktop settings"
-Start-Job -FilePath c:\scripts\Set-SandboxDesktop.ps1
+Start-Job -FilePath (Join-Path -path $SetupPath -childpath Set-SandboxDesktop.ps1)
 
 #set DNS
 Set-DnsClientServerAddress -InterfaceIndex (Get-NetAdapter).ifIndex -ServerAddresses 1.1.1.1
@@ -47,7 +52,10 @@ Start-Sleep -Seconds 30
 log "Starting Windows Terminal"
 Start-Process wt.exe "-M new-tab -p PowerShell -d C:\ ; split-pane -V -p Windows PowerShell ; focus-tab --target 0"
 
-log "Sending toast notification"
-C:\scripts\sandbox-toast.ps1
+log "Sending toast notification in the Windows Sandbox"
+&(Join-Path -path $SetupPath -childpath sandbox-toast.ps1)
+
+#set the flag on the host
+Get-Date | Out-File -FilePath c:\scripts\sandbox.flag
 
 log "Ending configuration script"
