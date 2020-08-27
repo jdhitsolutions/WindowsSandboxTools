@@ -1,0 +1,25 @@
+<Configuration>
+    <MappedFolders>
+        <MappedFolder>
+            <!-- Create a drive mapping that mirrors my Scripts folder -->
+            <HostFolder>C:\scripts</HostFolder>
+            <SandboxFolder>C:\scripts</SandboxFolder>
+            <ReadOnly>false</ReadOnly>
+        </MappedFolder>
+        <MappedFolder>
+            <HostFolder>C:\Pluralsight</HostFolder>
+            <SandboxFolder>C:\Pluralsight</SandboxFolder>
+            <ReadOnly>true</ReadOnly>
+        </MappedFolder>
+    </MappedFolders>
+    <vGPU>Enable</vGPU>
+    <ClipboardRedirection>True</ClipboardRedirection>
+    <MemoryInMB>8192</MemoryInMB>
+    <LogonCommand>
+        <Command>C:\scripts\sandbox-setup.cmd</Command>
+    </LogonCommand>
+</Configuration>
+
+<!--
+https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-sandbox/windows-sandbox-configure-using-wsb-file
+ -->
