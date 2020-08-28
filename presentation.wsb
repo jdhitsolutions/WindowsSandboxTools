@@ -1,4 +1,4 @@
-<!--a simple configuration with drive mappings only-->
+<!--my configuration for presentations. This takes about 3 minutes to complete.-->
 <Configuration>
     <MappedFolders>
         <MappedFolder>
@@ -7,10 +7,19 @@
             <SandboxFolder>C:\scripts</SandboxFolder>
             <ReadOnly>false</ReadOnly>
         </MappedFolder>
+        <MappedFolder>
+            <!-- Create a drive mapping that mirrors my presentations older -->
+            <HostFolder>C:\users\jeff\Documents\Magic Briefcase\Presentations</HostFolder>
+            <SandboxFolder>C:\presentations</SandboxFolder>
+            <ReadOnly>false</ReadOnly>
+        </MappedFolder>
     </MappedFolders>
     <vGPU>Enable</vGPU>
     <ClipboardRedirection>Default</ClipboardRedirection>
     <MemoryInMB>8192</MemoryInMB>
+        <LogonCommand>
+        <Command>C:\scripts\WindowsSandboxTools\sandbox-setup-presentation.cmd</Command>
+    </LogonCommand>
 </Configuration>
 
 <!--

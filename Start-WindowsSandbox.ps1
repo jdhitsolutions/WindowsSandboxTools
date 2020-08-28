@@ -1,45 +1,64 @@
-#dot source a function that will resize the window
-# this function doesn't work the way I expect it to.
-# . C:\scripts\Set-MainWindowSize.ps1
-
 Function Start-WindowsSandbox {
-    [cmdletbinding(DefaultParameterSetName = "config")]
+    [cmdletbinding(SupportsShouldProcess, DefaultParameterSetName = "config")]
     [alias("wsb")]
     Param(
-        [Parameter(Position = 0,ParameterSetName = "config",HelpMessage="Specify the path to a wsb file.")]
-        [ValidateScript({Test-Path $_})]
+        [Parameter(Position = 0, ParameterSetName = "config", HelpMessage = "Specify the path to a wsb file.")]
+        [ValidateScript( { Test-Path $_ })]
         [string]$Configuration = "c:\scripts\WindowsSandboxTools\WinSandBx.wsb",
-        [Parameter(ParameterSetName = "normal",HelpMessage="Start with no customizations.")]
-        [switch]$NoSetup
-        #Setting the desktop resolution doesn't work as expected
-        #[Parameter(HelpMessage = "Specify desktop resolutions as an array like 1280,1024. The default is 1280,720.")]
-        #[int[]]$WindowSize = @(1280,720)
+        [Parameter(ParameterSetName = "normal", HelpMessage = "Start with no customizations.")]
+        [switch]$NoSetup,
+        [Parameter(HelpMessage = "Specify desktop resolutions as an array like 1920,1080. The default is 1280,720.")]
+        [int[]]$WindowSize = @(1280, 720)
     )
 
     Write-Verbose "Starting $($myinvocation.mycommand)"
 
+    #dot source a function to change the window state and size
+    . C:\scripts\WindowsSandboxTools\Set-WindowState.ps1
+    . C:\scripts\WindowsSandboxTools\Set-MainWindowSize.ps1
+
     if ($NoSetup) {
         Write-Verbose "Launching default WindowsSandbox.exe"
-        c:\windows\system32\WindowsSandbox.exe
+        if ($PSCmdlet.shouldProcess("default configuration", "Launch Windows Sandbox")) {
+            c:\windows\system32\WindowsSandbox.exe
+        }
     }
     else {
         Write-Verbose "Launching WindowsSandbox using configuration file $Configuration"
 
         #create a file watcher if calling a configuration that uses it
-        if ($Configuration -match "WinSandBx") {
-            write-Verbose "Registering a temporary file system watcher"
+        if ($Configuration -match "WinSandBx|presentation") {
+            Write-Verbose "Registering a temporary file system watcher"
             &$PSScriptroot\RegisterWatcher.ps1 | Out-Null
         }
-        Invoke-Item $Configuration
+
+        if ($PSCmdlet.shouldProcess($Configuration, "Launch Windows Sandbox")) {
+            Start-Process -path $Configuration
+        }
     }
 
-    #This code does not work as expected
-    <#
-    resize the sandbox window
-    Start-Sleep -seconds 10
-    Write-Verbose "Setting Windows Size to $($windowsize[0]) by $($windowsize[1])"
-    Get-Process -name WindowsSandboxClient | Set-WindowSize -width $windowsize[0] -height $windowsize[1]
-    #>
-    Write-Verbose "Ending $($myinvocation.mycommand)"
+    #WindowsSandbox.exe launches a child process, WindowsSandboxClient.
+    #That is the process that needs to be minimized
+    Write-Verbose "Waiting for child process WindowsSandboxClient"
+    do {
+        Start-Sleep -Seconds 1
+    } Until (Get-Process -Name WindowsSandboxClient -ErrorAction SilentlyContinue)
+
+    #give the process a chance to complete
+    Start-Sleep -Seconds 5
+    Write-Verbose "Setting Window size to $($WindowSize -join 'x')"
+    if ($pscmdlet.shouldProcess("WindowsSandboxClient", "Modifying Window size and state")) {
+        $clientProc = Get-Process -Name WindowsSandboxClient
+        #values to pass to the function are a percentage of the desired size
+        [int]$width = $WindowSize[0]*.6667
+        [int]$Height = $WindowSize[1]*.6667
+
+        Set-WindowSize -handle $clientproc.MainWindowHandle -width $width -height $height
+
+        #Configure the Windows Sandbox to run minimized (Issue #2)
+        Write-Verbose "Minimizing child process WindowsSandboxClient"
+        $clientProc | Set-WindowState -State minimize
+    }
+    Write-Verbose "Ending $($myinvocation.mycommand). Any script configurations will continue in the Windows Sandbox."
 }
 

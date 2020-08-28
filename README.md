@@ -17,4 +17,6 @@ Enable-WindowsOptionalFeature -Online -FeatureName Containers-DisposableClientVM
 
 ## My Tools
 
-This project is not a PowerShell module or set of files you can run as-is. You are welcome to clone, download or copy as needed.
+My default [configuration script](sandbox-config.ps1) takes about 4 minutes to complete. I use the [BurntToast](https://github.com/Windos/BurntToast) module to show a notification when it is complete. This project is not a PowerShell module or set of files you can run as-is. You are welcome to clone, download or copy as needed.
+
+Last updated 27 August, 2020.

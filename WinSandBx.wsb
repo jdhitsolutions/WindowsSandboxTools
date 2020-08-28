@@ -14,7 +14,9 @@
         </MappedFolder>
     </MappedFolders>
     <vGPU>Enable</vGPU>
-    <ClipboardRedirection>True</ClipboardRedirection>
+    <AudioInput>Disable</AudioInput>
+    <ProtectedClient>Disable</ProtectedClient>
+    <ClipboardRedirection>Default</ClipboardRedirection>
     <MemoryInMB>8192</MemoryInMB>
     <LogonCommand>
         <Command>C:\scripts\WindowsSandboxTools\sandbox-setup.cmd</Command>

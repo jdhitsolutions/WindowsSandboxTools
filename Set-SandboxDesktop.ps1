@@ -43,7 +43,7 @@ if (-not (Test-Path hkcu:\Software\Microsoft\Windows\CurrentVersion\Policies\Exp
     [void](New-Item hkcu:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer)
 }
 
-Set-ItemProperty hkcu:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\ -Name Hideclock -Value 1
+Set-ItemProperty hkcu:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\ -Name HideClock -Value 1
 Set-ItemProperty hkcu:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\ -Name HideSCAVolume -Value 1
 Set-ItemProperty hkcu:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\ -Name HideSCANetwork -Value 1
 
