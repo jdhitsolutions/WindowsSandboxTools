@@ -1,5 +1,13 @@
-<!--a simple configuration with drive mappings only-->
 <Configuration>
+    <Metadata>
+        <Name>Simple</Name>
+        <Author>Jeff Hicks</Author>
+        <Description>a simple configuration with mapping to C:\Scripts</Description>
+        <Updated>2020-09-10 08:47:10Z</Updated>
+    </Metadata>
+    <vGPU>Enable</vGPU>
+    <ClipboardRedirection>Default</ClipboardRedirection>
+    <MemoryInMB>8192</MemoryInMB>
     <MappedFolders>
         <MappedFolder>
             <!-- Create a drive mapping that mirrors my Scripts folder -->
@@ -8,11 +16,4 @@
             <ReadOnly>false</ReadOnly>
         </MappedFolder>
     </MappedFolders>
-    <vGPU>Enable</vGPU>
-    <ClipboardRedirection>Default</ClipboardRedirection>
-    <MemoryInMB>8192</MemoryInMB>
 </Configuration>
-
-<!--
-https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-sandbox/windows-sandbox-configure-using-wsb-file
- -->
