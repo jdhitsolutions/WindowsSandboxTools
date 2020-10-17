@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!--
+format type data generated 09/10/2020 10:07:01 by BOVINE320\Jeff
+-->
+<Configuration>
+  <ViewDefinitions>
+    <View>
+      <!--Created 09/10/2020 10:07:01 by BOVINE320\Jeff-->
+      <Name>default</Name>
+      <ViewSelectedBy>
+        <TypeName>wsbConfiguration</TypeName>
+      </ViewSelectedBy>
+      <GroupBy>
+        <!--
+            You can also use a scriptblock to define a custom property name.
+            You must have a Label tag.
+            <ScriptBlock>$_.machinename.toUpper()</ScriptBlock>
+            <Label>Computername</Label>
+
+            Use <Label> to set the displayed value.
+-->
+        <ScriptBlock> $_.metadata.Name </ScriptBlock>
+        <Label>Name</Label>
+      </GroupBy>
+      <ListControl>
+        <ListEntries>
+          <ListEntry>
+            <ListItems>
+              <!--
+            By default the entries use property names, but you can replace them with scriptblocks.
+            <ScriptBlock>$_.foo /1mb -as [int]</ScriptBlock>
+-->
+              <ListItem>
+                <Label>vGPU</Label>
+                <PropertyName>vGPU</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>MemoryInMB</Label>
+                <PropertyName>MemoryInMB</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>AudioInput</Label>
+                <PropertyName>AudioInput</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>VideoInput</Label>
+                <PropertyName>VideoInput</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>ClipboardRedirection</Label>
+                <PropertyName>ClipboardRedirection</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>PrinterRedirection</Label>
+                <PropertyName>PrinterRedirection</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>Networking</Label>
+                <PropertyName>Networking</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>ProtectedClient</Label>
+                <PropertyName>ProtectedClient</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>LogonCommand</Label>
+                <PropertyName>LogonCommand</PropertyName>
+              </ListItem>
+              <ListItem>
+                <Label>MappedFolders</Label>
+                <ScriptBlock>
+                  $mf = @()
+                    foreach ($f in $_.mappedfolder) {
+                      $mf+=  "{0} -> {1} [RO:{2}]" -f $f.hostfolder,$f.sandboxfolder,$f.readonly
+                    }
+                    $mf -join "`n"
+                </ScriptBlock>
+              </ListItem>
+            </ListItems>
+          </ListEntry>
+        </ListEntries>
+      </ListControl>
+    </View>
+  </ViewDefinitions>
+</Configuration>

@@ -36,17 +36,17 @@ Set-DnsClientServerAddress -InterfaceIndex (Get-NetAdapter).ifIndex -ServerAddre
 
 log "Hiding tray icons"
 Start-Job {
-    if (-not (Test-Path hkcu:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer)) {
-        [void](New-Item hkcu:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer)
+    if (-not (Test-Path -path hkcu:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer)) {
+        [void](New-Item -path hkcu:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer)
     }
-    Set-ItemProperty hkcu:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\ -Name HideClock -Value 1
-    Set-ItemProperty hkcu:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\ -Name HideSCAVolume -Value 1
-    Set-ItemProperty hkcu:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\ -Name HideSCANetwork -Value 1
-    if (-not (Test-Path hkcu:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced)) {
-        [void](New-Item hkcu:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced)
+    Set-ItemProperty -path hkcu:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\ -Name HideClock -Value 1
+    Set-ItemProperty -path hkcu:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\ -Name HideSCAVolume -Value 1
+    Set-ItemProperty -path hkcu:\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer\ -Name HideSCANetwork -Value 1
+    if (-not (Test-Path -path hkcu:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced)) {
+        [void](New-Item -path hkcu:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced)
     }
 
-    Set-ItemProperty hkcu:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name HideIcons -Value 1
+    Set-ItemProperty -path hkcu:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced -Name HideIcons -Value 1
 }
 #wait for everything to finish
 log "Waiting for background jobs to complete"

@@ -1,4 +1,4 @@
-<!-- call paths must be hard coded-->
+<!-- all paths must be hard coded-->
 <Configuration>
     <MappedFolders>
         <MappedFolder>

@@ -1,5 +1,13 @@
 # Change Log for Windows SandBox Tools
 
+## _placeholder_
+
++ Code cleanup for the sake of clarity.
++ Migrated commands to a module, `WindowsSandboxTools`.
++ Made `Configuration` parameter mandatory in `Start-WindowsSandbox`.
++ Fixed default logo path in `RegisterWatcher`.
++ Added timestamp to verbose messages in `Start-WindowsSandbox`.
+
 ## September 10, 2020
 
 + Changed default screen size in `Start-WindowsSandbox` to 1920x1080.

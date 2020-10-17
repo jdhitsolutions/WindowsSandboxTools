@@ -15,9 +15,9 @@ Get-WindowsOptionalFeature -online -FeatureName Containers-DisposableClientVM
 Enable-WindowsOptionalFeature -Online -FeatureName Containers-DisposableClientVM
 ```
 
-## My Tools
+## The WindowsSandBoxTools Module
 
-My default [configuration script](sandbox-config.ps1) takes about 4 minutes to complete. I use the [BurntToast](https://github.com/Windos/BurntToast) module to show a Windows Action Center notification when it is complete. This project is not a PowerShell module or set of files you can run as-is. You are welcome to clone, download or copy as needed.
+I have created a PowerShell module called `WindowsSandBoxTools` that packages up the core functionality.
 
 ### Start-WindowsSandbox
 
@@ -27,9 +27,9 @@ The `Start-WindowsSandbox` function is my primary tool. It has an alias of `wsb`
 
 If you use the `NoSetup` parameter, it will launch the default Windows Sandbox. In either usage, you can specify display dimensions for the sandbox. The `WindowSize` parameter expects an array of width and height, like 1024,768. My default is 1920,1080. You may have to drag the window slightly to force the sandbox to redraw the screen and remove the horizontal scrollbar. Setting the display is tricky and I don't know if what I am using will work for everyone so if you don't get the results you expect, post an issue.
 
-### Wsb Functions
+### Get-WsbConfiguration
 
-I have created a simple module called `wsbFunctions.psm1`. In this module are functions designed to make it easier to view a wsb configuration, create a new configuration and export a configuration to a file. The functions use a number of class definitions.
+I have created a simple module called `wsbFunctions.psm1`. In this module are functions designed to make it easier to view a wsb configuration, create a new configuration, and export a configuration to a file. The functions use several PowerShell class definitions.
 
 ```text
 PS C:\> Get-WsbConfiguration d:\wsb\simple.wsb
@@ -50,7 +50,7 @@ LogonCommand         :
 MappedFolders        : C:\scripts -> C:\scripts [RO:False]
 ```
 
-The command uses a custom format file to display the configuration. I have also found a way to insert metadata into the wsb file which (so far) doesn't interfere with the Windows Sandbox application.
+The command uses a custom format file to display the configuration. I have also found a way to insert metadata into the wsb file which (so far) doesn't  appear to interfere with the Windows Sandbox application.
 
 ```text
 PS C:\> Get-WsbConfiguration d:\wsb\simple.wsb -MetadataOnly
@@ -59,6 +59,8 @@ Author     Name   Description                                       Updated
 ------     ----   -----------                                       -------
 Jeff Hicks Simple a simple configuration with mapping to C:\Scripts 9/10/2020 4:47:10 AM
 ```
+
+### New-WsbConfiguration
 
 If you wanted, you could create a new configuration.
 
@@ -143,8 +145,24 @@ I can easily launch this configuration.
 Start-WindowsSandbox -Configuration D:\wsb\demo.wsb
 ```
 
+### New-WsbMappedFolder
+
+ TO-DO
+
+### Export-WSBConfiguration
+
+  TO-DO
+
+## My Configuration Scripts
+
+My default [configuration script](sandbox-config.ps1) takes about 4 minutes to complete. I use the [BurntToast](https://github.com/Windos/BurntToast) module to show a Windows Action Center notification when it is complete. This project is not a PowerShell module or set of files you can run as-is. You are welcome to clone, download or copy as needed.
+
 ## RoadMap
 
-Now that I have added more functionality, I may build a single PowerShell module to package all of the Windows Sandbox management functions. I might also look for a way to organize script components used for LogonCommand settings and a better solution for organizing `wsb` files.
+This is a list of items I'd like to address or handle more efficiently:
 
-Last updated *10 September, 2020*.
++ Look for a way to organize script components used for LogonCommand settings.
++ I need a better solution for organizing `wsb` files.
++ Use a default shared folder that can be a bit more generic.
+
+Last updated *16 October, 2020*.

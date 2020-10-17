@@ -9,7 +9,7 @@
         </MappedFolder>
         <MappedFolder>
             <!-- Create a drive mapping that mirrors my presentations older -->
-            <HostFolder>C:\users\jeff\Documents\Magic Briefcase\Presentations</HostFolder>
+            <HostFolder>C:\Presentations</HostFolder>
             <SandboxFolder>C:\presentations</SandboxFolder>
             <ReadOnly>false</ReadOnly>
         </MappedFolder>
@@ -21,7 +21,3 @@
         <Command>C:\scripts\WindowsSandboxTools\sandbox-setup-presentation.cmd</Command>
     </LogonCommand>
 </Configuration>
-
-<!--
-https://docs.microsoft.com/en-us/windows/security/threat-protection/windows-sandbox/windows-sandbox-configure-using-wsb-file
- -->

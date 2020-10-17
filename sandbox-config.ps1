@@ -23,19 +23,19 @@ Update-Module PackageManagement, PowerShellGet -force
 
 #run updates and installs in the background
 log "Updating Windows PowerShell Help"
-Start-Job { powershell -command { Update-Help -force}}
+Start-Job { powershell -command { Update-Help -force } }
 log "Installing default modules: PSScriptTools, PSTeachingTools, BurntToast"
-Start-Job {Install-Module PSScriptTools, PSTeachingTools, BurntToast -force}
+Start-Job { Install-Module PSScriptTools, PSTeachingTools, BurntToast -force }
 log "Installing PSReleaseTools and PowerShell 7 + Preview"
 Start-Job {
     Install-Module PSReleaseTools -force;
     Install-PowerShell -mode quiet -enableremoting -EnableContextMenu;
     Install-PSPreview -mode quiet -enableremoting -EnableContextMenu;
     #update help
-    C:\Program` Files\PowerShell\7\pwsh.exe -command {Update-Help -force}
+    C:\Program` Files\PowerShell\7\pwsh.exe -command { Update-Help -force }
 }
 log "Installing Windows Terminal"
-Start-Job {Install-Module WTToolbox -force ; Install-WTRelease}
+Start-Job { Install-Module WTToolbox -force ; Install-WTRelease }
 log "Installing VSCode"
 Start-Job -FilePath (Join-Path -path $SetupPath -childpath install-vscodesandbox.ps1)
 log "Configuring desktop settings"
