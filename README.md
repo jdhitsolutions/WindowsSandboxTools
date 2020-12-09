@@ -157,6 +157,8 @@ Start-WindowsSandbox -Configuration D:\wsb\demo.wsb
 
 My default [configuration script](sandbox-config.ps1) takes about 4 minutes to complete. I use the [BurntToast](https://github.com/Windos/BurntToast) module to show a Windows Action Center notification when it is complete. This project is not a PowerShell module or set of files you can run as-is. You are welcome to clone, download or copy as needed.
 
+TODO $wsbConfigPath
+
 ## RoadMap
 
 This is a list of items I'd like to address or handle more efficiently:

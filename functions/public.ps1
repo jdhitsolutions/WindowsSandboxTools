@@ -346,7 +346,7 @@ Function Start-WindowsSandbox {
     Param(
         [Parameter(Position = 0, Mandatory,ParameterSetName = "config", HelpMessage = "Specify the path to a wsb file.")]
         [ValidateScript({ Test-Path $_ })]
-        #this is my default configuration
+        [ArgumentCompleter({if (Test-Path $global:wsbConfigPath) {(Get-Childitem $Global:wsbConfigPath).fullname}})]
         [string]$Configuration,
         [Parameter(ParameterSetName = "normal", HelpMessage = "Start with no customizations.")]
         [switch]$NoSetup,
@@ -356,6 +356,13 @@ Function Start-WindowsSandbox {
 
     Write-Verbose "[$((Get-Date).TimeOfDay)] Starting $($myinvocation.mycommand)"
 
+    #test if Windows Sandbox is already running
+    $test = Get-Process -ErrorAction SilentlyContinue -Name WindowsSandbox*
+    if ($test) {
+        Write-Warning "An instance of Windows Sandbox is already running."
+        #bail out
+        return
+    }
     if ($NoSetup) {
         Write-Verbose "[$((Get-Date).TimeOfDay)] Launching default WindowsSandbox.exe"
         if ($PSCmdlet.shouldProcess("default configuration", "Launch Windows Sandbox")) {
@@ -402,6 +409,7 @@ Function Start-WindowsSandbox {
         #values to pass to the function are a percentage of the desired size
         [int]$width = $WindowSize[0] * .6667
         [int]$Height = $WindowSize[1] * .6667
+        Write-Verbose "[$((Get-Date).TimeOfDay)] Modifying handle $($clientproc.mainwindowhandle) with a width of $($WindowSize[0]) and height of $($WindowSize[1])"
 
         Set-WindowSize -handle $clientproc.MainWindowHandle -width $width -height $height
 
@@ -410,5 +418,8 @@ Function Start-WindowsSandbox {
         $clientProc | Set-WindowState -State minimize
     }
     Write-Verbose "[$((Get-Date).TimeOfDay)] Ending $($myinvocation.mycommand). Any script configurations will continue in the Windows Sandbox."
+
     Write-Host "[$((Get-Date).TimeOfDay)] Windows Sandbox has been launched. You may need to wait for any configurations to complete." -foregroundColor green
 }
+
+#

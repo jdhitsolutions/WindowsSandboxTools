@@ -21,6 +21,8 @@ Function Set-WindowSize {
 
     Begin {
         Write-Verbose "Starting $($MyInvocation.Mycommand)"
+        Write-Verbose "Using a window width of $Width"
+        Write-Verbose "Using a window Height of $height"
         Write-Verbose "Adding type code"
 
         Add-Type @"
@@ -164,7 +166,6 @@ public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
 }
 
 Function Register-Watcher {
-
     [cmdletbinding(SupportsShouldProcess)]
     Param(
         [Parameter(HelpMessage = "Enter the full filename and path to the flag file. The file will be created in the sandbox in a shared folder.")]
@@ -184,8 +185,20 @@ Function Register-Watcher {
         [string]$Sound = "Call10"
     )
 
+    #the event subscriber identifier
+    $SourceID = "WatchWSB"
+
     if (Test-Path -Path $flag) {
         Remove-Item $flag
+    }
+
+    #check for any left over event subscribers and remove them so we start clean
+    Try {
+        $sub = Get-EventSubscriber -SourceIdentifier $SourceID -ErrorAction Stop
+        $sub | Unregister-Event
+    }
+    Catch {
+        #ignore errors because it means the event subscriber doesn't exist
     }
 
     $rFlag = $flag.replace("\", "\\")
@@ -216,6 +229,6 @@ if (Test-Path $flag) {
     $action = [scriptblock]::Create($sb)
 
     if ($pscmdlet.ShouldProcess($query, "Register Event")) {
-        Register-CimIndicationEvent -query $query -source "WatchWSB" -Action $action
+        Register-CimIndicationEvent -query $query -source $SourceID -Action $action
     } #WhatIf
 }

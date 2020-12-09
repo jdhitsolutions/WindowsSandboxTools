@@ -1,5 +1,9 @@
 # Change Log for Windows SandBox Tools
 
+## TODO
+
++ Updated `README.md`
+
 ## _placeholder_
 
 + Code cleanup for the sake of clarity.
@@ -7,6 +11,12 @@
 + Made `Configuration` parameter mandatory in `Start-WindowsSandbox`.
 + Fixed default logo path in `RegisterWatcher`.
 + Added timestamp to verbose messages in `Start-WindowsSandbox`.
++ Modified `Register-Watcher` to remove any left-over event subscriber.
++ Created a global variable `wsbConfigPath` which can be used to reference a centralized location for WSB files.
++ Created a global variable `wsbScripts` which can be used to reference a centralized location for scripts.
++ Added argument completer for the `Configuration` parameter in `Start-WindowsSandbox`.,
++ Updated `Start-WindowsSandbox` to test if an instance is already running and display a warning if it is.
++ Updated setup scripts.
 
 ## September 10, 2020
 
