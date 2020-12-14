@@ -1,10 +1,6 @@
 # Change Log for Windows SandBox Tools
 
-## TODO
-
-+ Updated `README.md`
-
-## _placeholder_
+## December 14, 2020
 
 + Code cleanup for the sake of clarity.
 + Migrated commands to a module, `WindowsSandboxTools`.
@@ -14,9 +10,9 @@
 + Modified `Register-Watcher` to remove any left-over event subscriber.
 + Created a global variable `wsbConfigPath` which can be used to reference a centralized location for WSB files.
 + Created a global variable `wsbScripts` which can be used to reference a centralized location for scripts.
-+ Added argument completer for the `Configuration` parameter in `Start-WindowsSandbox`.,
++ Added argument completer for the `Configuration` parameter in `Start-WindowsSandbox` and `Get-WsbConfiguration`.
 + Updated `Start-WindowsSandbox` to test if an instance is already running and display a warning if it is.
-+ Updated setup scripts.
++ Updated setup scripts and sample configuration files.
 
 ## September 10, 2020
 

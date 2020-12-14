@@ -193,7 +193,8 @@ Function Get-WsbConfiguration {
     Param(
         [Parameter(Position = 0, Mandatory, HelpMessage = "Specify the path to the .wsb file.")]
         [ValidatePattern('\.wsb$')]
-        [ValidateScript( { Test-Path $_ })]
+        [ValidateScript({Test-Path $_ })]
+        [ArgumentCompleter({if (Test-Path $global:wsbConfigPath) {(Get-Childitem $Global:wsbConfigPath).fullname}})]
         [string]$Path,
         [Parameter(HelpMessage = "Only display metadata information.")]
         [switch]$MetadataOnly
@@ -348,8 +349,10 @@ Function Start-WindowsSandbox {
         [ValidateScript({ Test-Path $_ })]
         [ArgumentCompleter({if (Test-Path $global:wsbConfigPath) {(Get-Childitem $Global:wsbConfigPath).fullname}})]
         [string]$Configuration,
+
         [Parameter(ParameterSetName = "normal", HelpMessage = "Start with no customizations.")]
         [switch]$NoSetup,
+        
         [Parameter(HelpMessage = "Specify desktop resolutions as an array like 1280,720. The default is 1920,1080.")]
         [int[]]$WindowSize = @(1920, 1080)
     )
@@ -372,6 +375,7 @@ Function Start-WindowsSandbox {
     else {
         Write-Verbose "[$((Get-Date).TimeOfDay)] Launching WindowsSandbox using configuration file $Configuration"
 
+        #TODO - Parameterize this behavior
         #create a file watcher if calling a configuration that uses it
         if ($Configuration -match "WinSandBx|presentation") {
             Write-Verbose "[$((Get-Date).TimeOfDay)] Registering a temporary file system watcher"
@@ -417,9 +421,17 @@ Function Start-WindowsSandbox {
         Write-Verbose "[$((Get-Date).TimeOfDay)] Minimizing child process WindowsSandboxClient"
         $clientProc | Set-WindowState -State minimize
     }
-    Write-Verbose "[$((Get-Date).TimeOfDay)] Ending $($myinvocation.mycommand). Any script configurations will continue in the Windows Sandbox."
+
+    $wsb = Get-WsbConfiguration -Path $Configuration
+    if ($wsb.LogonCommand) {
+        Write-Verbose "[$((Get-Date).TimeOfDay)] Running logon command $($wsb.LogonCommand) in the Windows Sandbox."
+    }
+
+    if ($wsb.MappedFolder) {
+        Write-Verbose "[$((Get-Date).TimeOfDay)] Mapping these folders"
+        $wsb.MappedFolder | Out-String | Write-Verbose
+    }
+    Write-Verbose "[$((Get-Date).TimeOfDay)] Ending $($myinvocation.mycommand)."
 
     Write-Host "[$((Get-Date).TimeOfDay)] Windows Sandbox has been launched. You may need to wait for any configurations to complete." -foregroundColor green
 }
-
-#

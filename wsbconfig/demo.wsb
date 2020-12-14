@@ -1,0 +1,26 @@
+<Configuration>
+  <Metadata>
+    <Name>demo</Name>
+    <Author>Jeff</Author>
+    <Description>This is a demonstration WSB file.</Description>
+    <Updated>12/10/2020 09:00:54</Updated>
+  </Metadata>
+  <vGPU>Enable</vGPU>
+  <MemoryInMB>8192</MemoryInMB>
+  <AudioInput>Default</AudioInput>
+  <VideoInput>Default</VideoInput>
+  <ClipboardRedirection>Default</ClipboardRedirection>
+  <PrinterRedirection>Default</PrinterRedirection>
+  <Networking>Default</Networking>
+  <ProtectedClient>Default</ProtectedClient>
+  <LogonCommand>
+    <Command>c:\scripts\wsbscripts\demo.cmd</Command>
+  </LogonCommand>
+  <MappedFolders>
+    <MappedFolder>
+      <HostFolder>C:\Scripts</HostFolder>
+      <SandboxFolder>C:\Scripts</SandboxFolder>
+      <ReadOnly>False</ReadOnly>
+    </MappedFolder>
+  </MappedFolders>
+</Configuration>
