@@ -1,0 +1,31 @@
+<Configuration>
+    <Metadata>
+        <Name>C:\scripts\wsbconfig\basic.wsb</Name>
+        <Author>Jeff Hicks</Author>
+        <Description>Basic sandbox with Scripts and shared folder</Description>
+        <Updated>12/21/2020 9:30 AM</Updated>
+    </Metadata>
+    <vGPU>Enable</vGPU>
+    <MemoryInMB>8192</MemoryInMB>
+    <AudioInput>Disable</AudioInput>
+    <VideoInput>Default</VideoInput>
+    <ClipboardRedirection>Default</ClipboardRedirection>
+    <PrinterRedirection>Default</PrinterRedirection>
+    <Networking>Default</Networking>
+    <ProtectedClient>Disable</ProtectedClient>
+    <LogonCommand>
+        <Command>C:\scripts\wsbScripts\sandbox-basic.cmd</Command>
+    </LogonCommand>
+    <MappedFolders>
+        <MappedFolder>
+            <HostFolder>C:\scripts</HostFolder>
+            <SandboxFolder>C:\scripts</SandboxFolder>
+            <ReadOnly>False</ReadOnly>
+        </MappedFolder>
+        <MappedFolder>
+            <HostFolder>C:\shared</HostFolder>
+            <SandboxFolder>C:\shared</SandboxFolder>
+            <ReadOnly>False</ReadOnly>
+        </MappedFolder>
+    </MappedFolders>
+</Configuration>

@@ -1,5 +1,18 @@
 # Change Log for Windows SandBox Tools
 
+## v1.0.0
+
++ Updated `Start-WindowsSandbox` to not scale resolutions.
++ Fixed bug in `Start-WindowsSandbox` that was testing for a configuration when using the basic configuration. [Issue 4](https://github.com/jdhitsolutions/WindowsSandboxTools/issues/4)
++ Reorganized module layout.
++ Added my configurations and scripts.
++ Moved class definitions to the root module file.
++ Updated help documentation.
++ Updated `New-WsbMappedFolder` to use a switch for `-Readonly`.
++ Fixed bug where Verbose remained on if importing the module with `-Verbose`.
++ Updated `README.md`.
++ Published to the PowerShell Gallery
+
 ## December 14, 2020
 
 + Code cleanup for the sake of clarity.

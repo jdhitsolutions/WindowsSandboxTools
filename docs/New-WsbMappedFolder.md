@@ -8,30 +8,35 @@ schema: 2.0.0
 # New-WsbMappedFolder
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+
+Create a mapped folder object.
 
 ## SYNTAX
 
-```
-New-WsbMappedFolder [-HostFolder] <String> [-SandboxFolder] <String> [-ReadOnly <String>] [<CommonParameters>]
+```yaml
+New-WsbMappedFolder [-HostFolder] <String> [-SandboxFolder] <String> [-ReadOnly] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+
+You this folder to create a new mapped folder object. You can use this when creating a new Windows sandbox configuration. The sandbox will only have a C: drive.
 
 ## EXAMPLES
 
 ### Example 1
+
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> $map = New-WsbMappedFolder -HostFolder c:\work -SandboxFolder c:\work
+PS C:\> New-WsbConfiguration -Name work -MappedFolder $map -Description "Work sandbox"
 ```
 
-{{ Add example description here }}
+Create a shared folder with write access and then use that object in a new configuration.
 
 ## PARAMETERS
 
 ### -HostFolder
-Specify the path to the local folder you want to map.
+
+Specify the path to the local folder you want to map. This folder must already exist.
 
 ```yaml
 Type: String
@@ -46,13 +51,13 @@ Accept wildcard characters: False
 ```
 
 ### -ReadOnly
+
 Specify if you want the mapping to be Read-Only.
 
 ```yaml
-Type: String
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
-Accepted values: True, False
 
 Required: False
 Position: Named
@@ -62,6 +67,7 @@ Accept wildcard characters: False
 ```
 
 ### -SandboxFolder
+
 Specify the mapped folder for the Windows Sandbox.
 It must start with C:\
 
@@ -78,6 +84,7 @@ Accept wildcard characters: False
 ```
 
 ### CommonParameters
+
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
@@ -90,4 +97,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
+Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
+
 ## RELATED LINKS
+
+[New-WsbConfiguration](New-WsbConfiguration.md)

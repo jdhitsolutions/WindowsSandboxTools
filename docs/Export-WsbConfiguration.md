@@ -26,10 +26,8 @@ This command will take an existing Windows Sandbox Configuration object and expo
 ### Example 1
 
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> New-WsbConfiguration -Name demo -LogonCommand C:\scripts\wsbscripts\sandbox-basic.cmd -MemoryInMB (4096*2) -MappedFolder (New-WsbMappedFolder -HostFolder c:\scratch -SandboxFolder c:\junk) -Description "My test WSB configuration" | Export-WsbConfiguration -Path c:\scratch\scratch.wsb
 ```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
@@ -67,7 +65,7 @@ Accept wildcard characters: False
 
 ### -NoClobber
 
-Don't overwrite an existing file
+Don't overwrite an existing file.
 
 ```yaml
 Type: SwitchParameter
@@ -129,4 +127,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
+Learn more about PowerShell: http://jdhitsolutions.com/blog/essential-powershell-resources/
+
 ## RELATED LINKS
+
+[New-WsbConfiguration](New-WsbConfiguration.md)

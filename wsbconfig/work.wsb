@@ -1,0 +1,26 @@
+<Configuration>
+  <Metadata>
+    <Name>work</Name>
+    <Author>Jeff</Author>
+    <Description>My work WSB configuration</Description>
+    <Updated>07/18/2022 15:43:24</Updated>
+  </Metadata>
+  <vGPU>Default</vGPU>
+  <MemoryInMB>8192</MemoryInMB>
+  <AudioInput>Default</AudioInput>
+  <VideoInput>Default</VideoInput>
+  <ClipboardRedirection>Default</ClipboardRedirection>
+  <PrinterRedirection>Default</PrinterRedirection>
+  <Networking>Default</Networking>
+  <ProtectedClient>Default</ProtectedClient>
+  <LogonCommand>
+    <Command>C:\scripts\windowssandboxtools\wsbScripts\basic.cmd</Command>
+  </LogonCommand>
+  <MappedFolders>
+    <MappedFolder>
+      <HostFolder>c:\work</HostFolder>
+      <SandboxFolder>c:\work</SandboxFolder>
+      <ReadOnly>False</ReadOnly>
+    </MappedFolder>
+  </MappedFolders>
+</Configuration>

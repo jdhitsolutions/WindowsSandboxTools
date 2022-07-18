@@ -4,7 +4,7 @@ The files in the folder are sample and reference WSB files. This location is ref
 
 ```powershell
 Import-Module WindowsSandboxTools
-$global:wsbConfigPath = "d:\scripts\wsb\configs
+$global:wsbConfigPath = "d:\wsb\configs
 ```
 
-You can create new configurations with `New-WsbConfiguration` and then save them to a file with `Export-WsbConfiguration`.
+You can create new configurations with `New-WsbConfiguration` and then save them to a file with `Export-WsbConfiguration`. File references in the file must use FileSystem paths.

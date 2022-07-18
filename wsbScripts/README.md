@@ -4,7 +4,7 @@ The files in this folder can be called from the WSB files. These files are offer
 
 ```powershell
 Import-Module WindowsSandboxTools
-$global:wsbScripts = "d:\scripts\wsb\code"
+$global:wsbScripts = "d:\wsb\code"
 ```
 
 Most of these scripts are intended to be run *IN* the Windows Sandbox, so any paths must be relative to the sandbox.

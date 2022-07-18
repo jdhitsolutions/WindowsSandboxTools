@@ -1,0 +1,29 @@
+<!--my configuration for Pluralsight recordings. This takes about 3 minutes to complete.-->
+<Configuration>
+    <MappedFolders>
+        <MappedFolder>
+            <!-- Create a drive mapping that mirrors my Scripts folder -->
+            <HostFolder>C:\scripts</HostFolder>
+            <SandboxFolder>C:\scripts</SandboxFolder>
+            <ReadOnly>false</ReadOnly>
+        </MappedFolder>
+        <MappedFolder>
+            <!-- Create a drive mapping that mirrors my presentations older -->
+            <HostFolder>C:\Pluralsight</HostFolder>
+            <SandboxFolder>C:\Pluralsight</SandboxFolder>
+            <ReadOnly>True</ReadOnly>
+        </MappedFolder>
+        <MappedFolder>
+            <HostFolder>C:\Shared</HostFolder>
+            <SandboxFolder>C:\shared</SandboxFolder>
+            <ReadOnly>False</ReadOnly>
+        </MappedFolder>
+    </MappedFolders>
+    <vGPU>Enable</vGPU>
+    <ClipboardRedirection>Default</ClipboardRedirection>
+    <MemoryInMB>16384</MemoryInMB>
+    <LogonCommand>
+        <!-- this is using the mapped C:\scripts folder. -->
+        <Command>C:\scripts\wsbScripts\sandbox-setup-pluralsight.cmd</Command>
+    </LogonCommand>
+</Configuration>
