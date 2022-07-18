@@ -21,6 +21,14 @@ I have created a PowerShell module called `WindowsSandBoxTools`. In this module 
 
 You can read the Microsoft documentation on creating a Windows Sandbox configuration at [https://docs.microsoft.com/windows/security/threat-protection/windows-sandbox/windows-sandbox-configure-using-wsb-file](https://docs.microsoft.com/windows/security/threat-protection/windows-sandbox/windows-sandbox-configure-using-wsb-file)
 
+Install the module from the PowerShell Gallery.
+
+```powershell
+Install-Module WindowsSandboxTools
+```
+
+It should work in Windows PowerShell and PowerShell 7 on Windows platforms.
+
 ### [Start-WindowsSandbox](docs/Start-WindowsSandbox.md)
 
 The [`Start-WindowsSandbox`](docs/Start-WindowsSandbox.mx) function is my primary tool. It has an alias of `wsb`. You can specify the path to the wsb file.
