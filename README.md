@@ -2,13 +2,15 @@
 
 ![sandbox](images/sandbox.jpg)
 
-This repository is a collection of PowerShell tools and scripts that I use to run and configure the Windows Sandbox feature that is part of Windows 10 2004. Many of the commands in this repository were first demonstrated on my [blog](https://jdhitsolutions.com/blog/powershell/7621/doing-more-with-windows-sandbox/). I strongly recommend you read the blog post before trying any of the code. As I mention in the blog post, most of the code here will __reduce the security__ of the Windows Sandbox application. This is a trade-off I am willing to make for the sake of functionality that meets *my* requirements. You have to decide how much of the code you would like to use.
+[![PSGallery Version](https://img.shields.io/powershellgallery/v/WindowsSandboxTools.png?style=for-the-badge&label=PowerShell%20Gallery)](https://www.powershellgallery.com/packages/WindowsSandboxTools/) [![PSGallery Downloads](https://img.shields.io/powershellgallery/dt/WindowsSandboxTools.png?style=for-the-badge&label=Downloads)](https://www.powershellgallery.com/packages/WindowsSandboxTools/)
+
+This repository is a collection of PowerShell tools and scripts that I use to run and configure the Windows Sandbox feature that was introduced in Windows 10 2004. Many of the commands in this repository were first demonstrated on my [blog](https://jdhitsolutions.com/blog/powershell/7621/doing-more-with-windows-sandbox/). I strongly recommend you read the blog post before trying any of the code. As I mention in the blog post, most of the code here will __reduce the security__ of the Windows Sandbox application. This is a trade-off I am willing to make for the sake of functionality that meets *my* requirements. You have to decide how much of the code you would like to use.
 
 __*All code is offered as-is with no guarantees. Nothing in this repository should be considered production-ready or used in critical environments without your extensive testing and validation.*__
 
 ## Installing the Windows Sandbox
 
-You need to have the 2004 version of Windows 10 or later. I don't know off-hand if it is supported on Windows 10 Home or Education editions. Otherwise, you should be able to run these PowerShell commands:
+You need to have the 2004 version of Windows 10 or later. The Windows Sandbox will run a containerized version of your operating system. I don't know off-hand if it is supported on Windows 10 Home or Education editions. Otherwise, you should be able to run these PowerShell commands to get started:
 
 ```powershell
 Get-WindowsOptionalFeature -Online -FeatureName Containers-DisposableClientVM
@@ -19,7 +21,7 @@ Enable-WindowsOptionalFeature -Online -FeatureName Containers-DisposableClientVM
 
 I have created a PowerShell module called `WindowsSandBoxTools`. In this module are functions designed to make it easier to view a `wsb` configuration, create a new configuration, and export a configuration to a file. The module functions use several PowerShell class definitions.
 
-You can read the Microsoft documentation on creating a Windows Sandbox configuration at [https://docs.microsoft.com/windows/security/threat-protection/windows-sandbox/windows-sandbox-configure-using-wsb-file](https://docs.microsoft.com/windows/security/threat-protection/windows-sandbox/windows-sandbox-configure-using-wsb-file)
+You can read the Microsoft documentation on creating a Windows Sandbox configuration at [https://docs.microsoft.com/windows/security/threat-protection/windows-sandbox/windows-sandbox-configure-using-wsb-file](https://docs.microsoft.com/windows/security/threat-protection/windows-sandbox/windows-sandbox-configure-using-wsb-file). The module commands are designed to abstract the process of creating the XML configuration files which have a `.wsb` extension.
 
 Install the module from the PowerShell Gallery.
 
@@ -27,7 +29,7 @@ Install the module from the PowerShell Gallery.
 Install-Module WindowsSandboxTools
 ```
 
-It should work in Windows PowerShell and PowerShell 7 on Windows platforms.
+The module should work in Windows PowerShell and PowerShell 7 on Windows platforms.
 
 ### [Start-WindowsSandbox](docs/Start-WindowsSandbox.md)
 
@@ -74,7 +76,7 @@ Jeff Hicks Simple a simple configuration with mapping to C:\Scripts 12/10/2021 8
 
 ### [New-WsbConfiguration](docs/New-WsbConfiguration.md)
 
-If you wanted, you could create a new configuration.
+This is how you can create a new Windows Sandbox configuration.
 
 ```powershell
 $params = @{
@@ -227,3 +229,6 @@ This is a list of items I'd like to address or handle more efficiently:
 + Look for a way to organize script components used for `LogonCommand` settings.
 + Use a default shared folder that can be a bit more generic.
 + Add a better way to provide or integrate toast notifications.
++ Create a graphical interface for creating configurations.
+
+Feel free to post enhancment suggestions in Issues.
