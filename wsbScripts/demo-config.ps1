@@ -5,7 +5,7 @@ $logParams = @{
     Append   = $True
 }
 
-"[$(Get-Date)] Starting $($myinvocation.mycommand)" | Out-File @logParams
+"[$(Get-Date)] Starting $($MyInvocation.MyCommand)" | Out-File @logParams
 
 "[$(Get-Date)] Enabling PSRemoting" | Out-File @logParams
 Enable-PSRemoting -Force -SkipNetworkProfileCheck

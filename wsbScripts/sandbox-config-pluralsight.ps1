@@ -5,8 +5,8 @@ $SetupPath = "C:\scripts\wsbScripts"
 #create a log file of the configuration process.
 Function log {
     Param(
-        [string]$msg,
-        [string]$log = "C:\work\wsblog.txt"
+        [String]$msg,
+        [String]$log = "C:\work\wsblog.txt"
     )
 
     "[{0}] {1}" -f (Get-Date), $msg | Out-File -FilePath $log -Encoding ascii -Append
@@ -16,17 +16,17 @@ log "Install package provider"
 Install-PackageProvider -name nuget -force -forcebootstrap -scope allusers
 
 log "Updating package management"
-Install-Module PackageManagement, PowerShellGet, PSReadline, WTToolbox -Force
+Install-Module PackageManagement, PowerShellGet, PSReadLine, WTToolbox -Force
 
 #run updates and installs in the background
 log "Updating Windows PowerShell Help"
-Start-Job { powershell -command { Update-Help -Force } }
+Start-Job { PowerShell -command { Update-Help -Force } }
 log "Installing default modules: PSScriptTools, PSTeachingTools, BurntToast"
 Start-Job { Install-Module PSScriptTools, PSTeachingTools, BurntToast -Force }
 log "Installing PSReleaseTools and PowerShell 7.x"
 Start-Job {
-    $msi = (Get-Item C:\shared\Powershell-7.1*msi).fullname
-    Start-Process -FilePath $msi -ArgumentList "/quiet REGISTER_MANIFEST=1 ADD_PATH=1 ENABLE_PSREMOTING=1 ADD_EXPLORER_CONTEXT_MENU_OPENPOWERSHELL=1 ADD_FILE_CONTEXT_MENU_RUNPOWERSHELL=1" -Wait
+    $msi = (Get-Item C:\shared\PowerShell-7.1*msi).FullName
+    Start-Process -FilePath $msi -ArgumentList "/quiet REGISTER_MANIFEST=1 ADD_PATH=1 ENABLE_PSREMOTING=1 ADD_EXPLORER_CONTEXT_MENU_OPENPowerShell=1 ADD_FILE_CONTEXT_MENU_RUNPowerShell=1" -Wait
 
     #update help
     C:\Program` Files\PowerShell\7\pwsh.exe -command { Update-Help -Force }
@@ -95,8 +95,8 @@ Start-Job {
     Get-ChildItem -Path $Fontsource -File | ForEach-Object {
         #Write-Host "Testing $($_.name)"
         if ($installedFiles -notcontains $_.name) {
-            Write-Host "installing $($_.name) from $($_.fullname)" -ForegroundColor green
-            $fontFolder.copyHere($_.fullname)
+            Write-Host "installing $($_.name) from $($_.FullName)" -ForegroundColor green
+            $fontFolder.copyHere($_.FullName)
         }
         else {
             Write-Host "$($_.name) already installed" -ForegroundColor yellow

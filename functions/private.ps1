@@ -2,7 +2,7 @@
 Function Set-WindowSize {
     #from https://gist.github.com/coldnebo/1148334
 
-    [cmdletbinding(SupportsShouldProcess)]
+    [CmdletBinding(SupportsShouldProcess)]
     Param(
         [Parameter(
             Position = 0,
@@ -10,17 +10,17 @@ Function Set-WindowSize {
             ValueFromPipeline,
             ValueFromPipelineByPropertyName
         )]
-        [ValidateNotNullorEmpty()]
+        [ValidateNotNullOrEmpty()]
         [Alias("handle")]
         [System.IntPtr]$MainWindowHandle = (Get-Process -id $pid).MainWindowHandle,
         [Alias("x")]
-        [int]$Width = 1280,
+        [Int]$Width = 1280,
         [Alias("y")]
-        [int]$Height = 720
+        [Int]$Height = 720
     )
 
     Begin {
-        Write-Verbose "Starting $($MyInvocation.Mycommand)"
+        Write-Verbose "Starting $($MyInvocation.MyCommand)"
         Write-Verbose "Using a window width of $Width"
         Write-Verbose "Using a window Height of $height"
         Write-Verbose "Adding type code"
@@ -88,12 +88,12 @@ public struct RECT
 
             [void]([Win32]::MoveWindow($MainWindowHandle, 0, 0, $width + $dx, $height + $dy, $true ))
 
-        } #close Whatif
+        } #close WhatIf
 
     } #process
 
     End {
-        Write-Verbose "Ending $($MyInvocation.Mycommand)"
+        Write-Verbose "Ending $($MyInvocation.MyCommand)"
     } #end
 
 } #end Set-WindowSize function
@@ -113,7 +113,7 @@ function Set-WindowState {
         [ValidateSet('FORCEMINIMIZE', 'HIDE', 'MAXIMIZE', 'MINIMIZE', 'RESTORE',
             'SHOW', 'SHOWDEFAULT', 'SHOWMAXIMIZED', 'SHOWMINIMIZED',
             'SHOWMINNOACTIVE', 'SHOWNA', 'SHOWNOACTIVATE', 'SHOWNORMAL')]
-        [string] $State = 'SHOW'
+        [String] $State = 'SHOW'
     )
 
     Begin {
@@ -166,23 +166,23 @@ public static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
 }
 
 Function Register-Watcher {
-    [cmdletbinding(SupportsShouldProcess)]
+    [CmdletBinding(SupportsShouldProcess)]
     Param(
         [Parameter(HelpMessage = "Enter the full filename and path to the flag file. The file will be created in the sandbox in a shared folder.")]
-        [ValidateNotNullorEmpty()]
-        [string]$Flag = "C:\scripts\sandbox.flag",
+        [ValidateNotNullOrEmpty()]
+        [String]$Flag = "C:\scripts\sandbox.flag",
         [Parameter(HelpMessage = "Enter the title for the toast notification.")]
-        [string]$Title = "Windows Sandbox",
+        [String]$Title = "Windows Sandbox",
         [Parameter(HelpMessage = "Enter the path to an image file for the toast notification.")]
         [ValidateScript( { Test-Path $_ })]
-        [string]$Logo = "$PSScriptRoot\..\images\sandbox.jpg",
+        [String]$Logo = "$PSScriptRoot\..\images\sandbox.jpg",
         [Parameter(HelpMessage = "Specify the sound to play for the toast notification.")]
         [ValidateSet('Default', 'IM', 'Mail', 'Reminder', 'SMS', 'Alarm', 'Alarm2', 'Alarm3',
             'Alarm4', 'Alarm5', 'Alarm6', 'Alarm7', 'Alarm8', 'Alarm9', 'Alarm10', 'Call',
             'Call2', 'Call3', 'Call4', 'Call5', 'Call6', 'Call7', 'Call8', 'Call9', 'Call10',
             'None'
         )]
-        [string]$Sound = "Call10"
+        [String]$Sound = "Call10"
     )
 
     #the event subscriber identifier
@@ -228,7 +228,7 @@ if (Test-Path $flag) {
 
     $action = [scriptblock]::Create($sb)
 
-    if ($pscmdlet.ShouldProcess($query, "Register Event")) {
+    if ($PSCmdlet.ShouldProcess($query, "Register Event")) {
         Register-CimIndicationEvent -query $query -source $SourceID -Action $action
     } #WhatIf
 }

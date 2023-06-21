@@ -1,5 +1,18 @@
 # Change Log for Windows SandBox Tools
 
+## v1.1.0
+
+### Changed
+
+- Updated license.
+- General code cleanup.
+- Updated help documentation.
+- Modified `Get-WSBConfiguration` to accept paths from the pipeline.
+
+### Added
+
+- Added missing online help links
+
 ## v1.0.0
 
 + Updated `Start-WindowsSandbox` to not scale resolutions.

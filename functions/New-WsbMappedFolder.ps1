@@ -1,30 +1,30 @@
 Function New-WsbMappedFolder {
-    [cmdletbinding()]
+    [CmdletBinding()]
     [OutputType("wsbMappedFolder")]
     Param(
         [Parameter(Position = 0, Mandatory, ValueFromPipelineByPropertyName, HelpMessage = "Specify the path to the local folder you want to map.")]
         [ValidateScript( { Test-Path $_ })]
-        [string]$HostFolder,
+        [String]$HostFolder,
 
         [Parameter(Position = 1, Mandatory, ValueFromPipelineByPropertyName, HelpMessage = "Specify the mapped folder for the Windows Sandbox. It must start with C:\")]
-        [ValidateNotNullorEmpty()]
+        [ValidateNotNullOrEmpty()]
         [ValidatePattern('^C:\\')]
-        [string]$SandboxFolder,
+        [String]$SandboxFolder,
 
         [Parameter(ValueFromPipelineByPropertyName, HelpMessage = "Specify if you want the mapping to be Read-Only.")]
         #[ValidateSet("True", "False")]
-        [switch]$ReadOnly
+        [Switch]$ReadOnly
     )
 
     Begin {
-        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN] Starting $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN] Starting $($MyInvocation.MyCommand)"
     } #begin
     Process {
-        Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Processing"
+        Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Processing"
 
         [wsbMappedFolder]::New($HostFolder, $SandboxFolder, $ReadOnly)
     } #process
     End {
-        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeOfDay) END    ] Ending $($MyInvocation.MyCommand)"
     } #end
 }

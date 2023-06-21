@@ -23,7 +23,7 @@ $loadInf | Out-File $infPath
 Start-Process -FilePath $file -ArgumentList "/VERYSILENT /LOADINF=${infPath}" -Wait
 
 #add extensions
-Start-Process -FilePath "C:\Program Files\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension ms-vscode.powerShell"
+Start-Process -FilePath "C:\Program Files\Microsoft VS Code\bin\code.cmd" -ArgumentList "--install-extension ms-vscode.PowerShell"
 
 if (Test-Path Function:\log) {
   log "VSCode Setup Complete"

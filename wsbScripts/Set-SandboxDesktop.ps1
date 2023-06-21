@@ -2,12 +2,12 @@
 # my Pluralsight-related configuration
 
 function Update-Wallpaper {
-    [cmdletbinding(SupportsShouldProcess)]
+    [CmdletBinding(SupportsShouldProcess)]
     Param(
         [Parameter(Position = 0, HelpMessage = "The path to the wallpaper file.")]
         [alias("wallpaper")]
         [ValidateScript( { Test-Path $_ })]
-        [string]$Path = $(Get-ItemPropertyValue -Path 'hkcu:\Control Panel\Desktop\' -Name Wallpaper)
+        [String]$Path = $(Get-ItemPropertyValue -Path 'hkcu:\Control Panel\Desktop\' -Name Wallpaper)
     )
 
     Add-Type @"
@@ -32,7 +32,7 @@ function Update-Wallpaper {
     }
 "@
 
-    if ($PSCmdlet.shouldProcess($path)) {
+    if ($PSCmdlet.ShouldProcess($path)) {
         [Wallpaper.UpdateImage]::Refresh($Path)
     }
 }
@@ -42,17 +42,17 @@ Function Restart-Explorer {
     .Synopsis
     Restart the Windows Explorer process.
     #>
-    [cmdletbinding(SupportsShouldProcess)]
-    [Outputtype("None")]
+    [CmdletBinding(SupportsShouldProcess)]
+    [OutputType("None")]
     Param()
 
-    Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Starting $($myinvocation.mycommand)"
-    Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Stopping Explorer.exe process"
+    Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Starting $($MyInvocation.MyCommand)"
+    Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Stopping Explorer.exe process"
     Get-Process -Name Explorer | Stop-Process -Force
     #give the process time to start
     Start-Sleep -Seconds 2
     Try {
-        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN  ] Verifying Explorer restarted"
+        Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN  ] Verifying Explorer restarted"
         $p = Get-Process -Name Explorer -ErrorAction stop
     }
     Catch {
@@ -65,7 +65,7 @@ Function Restart-Explorer {
             Throw $_
         }
     }
-    Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($myinvocation.mycommand)"
+    Write-Verbose "[$((Get-Date).TimeOfDay) END    ] Ending $($MyInvocation.MyCommand)"
 }
 
 #configure the taskbar and hide icons

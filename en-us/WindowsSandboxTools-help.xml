@@ -172,6 +172,10 @@
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/3PkXMvl</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>New-WsbConfiguration</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
@@ -183,7 +187,7 @@
       <command:verb>Get</command:verb>
       <command:noun>WsbConfiguration</command:noun>
       <maml:description>
-        <maml:para>Get a Windows Sandbox configuratoin.</maml:para>
+        <maml:para>Get a Windows Sandbox configuration.</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -192,7 +196,7 @@
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-WsbConfiguration</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
           <maml:name>Path</maml:name>
           <maml:description>
             <maml:para>Specify the path to the .wsb file. The command will autocomplete to the $wsbConfigPath variable.</maml:para>
@@ -230,7 +234,7 @@
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="True (ByValue)" position="0" aliases="none">
         <maml:name>Path</maml:name>
         <maml:description>
           <maml:para>Specify the path to the .wsb file. The command will autocomplete to the $wsbConfigPath variable.</maml:para>
@@ -303,6 +307,10 @@ Jeff   C:\scripts\wsbconfig\dev.wsb A test wsb file 12/10/2020 8:50:03 AM</dev:c
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/44aWC9X</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>New-WsbConfiguration</maml:linkText>
         <maml:uri></maml:uri>
@@ -905,6 +913,10 @@ Jeff   C:\scripts\wsbconfig\dev.wsb A test wsb file 12/10/2020 8:50:03 AM</dev:c
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/3qSqCJA</maml:uri>
+      </maml:navigationLink>
+      <maml:navigationLink>
         <maml:linkText>New-WsbMappedFolder</maml:linkText>
         <maml:uri></maml:uri>
       </maml:navigationLink>
@@ -1040,6 +1052,10 @@ PS C:\&gt; New-WsbConfiguration -Name work -MappedFolder $map -Description "Work
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/3PkPqUH</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>New-WsbConfiguration</maml:linkText>
         <maml:uri></maml:uri>
@@ -1261,6 +1277,10 @@ PS C:\&gt; New-WsbConfiguration -Name work -MappedFolder $map -Description "Work
       </command:example>
     </command:examples>
     <command:relatedLinks>
+      <maml:navigationLink>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://bit.ly/42Wde4i</maml:uri>
+      </maml:navigationLink>
       <maml:navigationLink>
         <maml:linkText>Get-WsbConfiguration</maml:linkText>
         <maml:uri></maml:uri>

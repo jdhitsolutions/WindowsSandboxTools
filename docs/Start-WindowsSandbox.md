@@ -1,7 +1,7 @@
 ---
 external help file: WindowsSandboxTools-help.xml
 Module Name: WindowsSandboxTools
-online version:
+online version: https://bit.ly/42Wde4i
 schema: 2.0.0
 ---
 

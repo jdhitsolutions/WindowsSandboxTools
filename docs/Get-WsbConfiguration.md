@@ -1,7 +1,7 @@
 ---
 external help file: WindowsSandboxTools-help.xml
 Module Name: WindowsSandboxTools
-online version:
+online version: https://bit.ly/44aWC9X
 schema: 2.0.0
 ---
 
@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 
-Get a Windows Sandbox configuratoin.
+Get a Windows Sandbox configuration.
 
 ## SYNTAX
 
@@ -83,7 +83,7 @@ Aliases:
 Required: True
 Position: 0
 Default value: None
-Accept pipeline input: False
+Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 

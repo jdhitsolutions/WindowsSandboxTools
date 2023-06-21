@@ -1,38 +1,38 @@
 Function New-WsbConfiguration {
-    [cmdletbinding(DefaultParameterSetName = "name")]
-    [outputType("wsbConfiguration")]
+    [CmdletBinding(DefaultParameterSetName = "name")]
+    [OutputType("wsbConfiguration")]
     Param(
         [Parameter(ValueFromPipelineByPropertyName)]
         [ValidateSet("Default", "Enable", "Disable")]
-        [string]$vGPU = "Default",
+        [String]$vGPU = "Default",
 
         [Parameter(ValueFromPipelineByPropertyName)]
         [ValidateScript( { $_ -ge 1024 })]
-        [string]$MemoryInMB = 4096,
+        [String]$MemoryInMB = 4096,
 
         [Parameter(ValueFromPipelineByPropertyName)]
         [ValidateSet("Default", "Enable", "Disable")]
-        [string]$AudioInput = "Default",
+        [String]$AudioInput = "Default",
 
         [Parameter(ValueFromPipelineByPropertyName)]
         [ValidateSet("Default", "Enable", "Disable")]
-        [string]$VideoInput = "Default",
+        [String]$VideoInput = "Default",
 
         [Parameter(ValueFromPipelineByPropertyName)]
         [ValidateSet("Default", "Disable")]
-        [string]$ClipboardRedirection = "Default",
+        [String]$ClipboardRedirection = "Default",
 
         [Parameter(ValueFromPipelineByPropertyName)]
         [ValidateSet("Default", "Enable", "Disable")]
-        [string]$PrinterRedirection = "Default",
+        [String]$PrinterRedirection = "Default",
 
         [Parameter(ValueFromPipelineByPropertyName)]
         [ValidateSet("Default", "Disable")]
-        [string]$Networking = "Default",
+        [String]$Networking = "Default",
 
         [Parameter(ValueFromPipelineByPropertyName)]
         [ValidateSet("Default", "Enable", "Disable")]
-        [string]$ProtectedClient = "Default",
+        [String]$ProtectedClient = "Default",
 
         [Parameter(ValueFromPipelineByPropertyName, HelpMessage = "The path and file are relative to the Windows Sandbox")]
         [object]$LogonCommand,
@@ -44,24 +44,24 @@ Function New-WsbConfiguration {
         [wsbMetadata]$Metadata,
 
         [parameter(Mandatory, ParameterSetName = "name", HelpMessage = "Give the configuration a name")]
-        [string]$Name,
+        [String]$Name,
 
         [parameter(ParameterSetName = "name", HelpMessage = "Provide a description")]
-        [string]$Description,
+        [String]$Description,
 
         [parameter(ParameterSetName = "name", HelpMessage = "Who is the author?")]
-        [string]$Author = $env:USERNAME
+        [String]$Author = $env:USERNAME
     )
 
     Begin {
-        Write-Verbose "[$((Get-Date).TimeofDay) BEGIN] Starting $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeOfDay) BEGIN] Starting $($MyInvocation.MyCommand)"
         $new = [wsbConfiguration]::new()
     } #begin
     Process {
-        Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Creating a configuration"
-        Write-Verbose ($psboundparameters | Out-String)
+        Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Creating a configuration"
+        Write-Verbose ($PSBoundParameters | Out-String)
 
-        if ($logonCommand -is [string]) {
+        if ($logonCommand -is [String]) {
             $cmd = $LogonCommand
         }
         elseif ($logonCommand.Command) {
@@ -89,12 +89,12 @@ Function New-WsbConfiguration {
             $metadata.updated = Get-Date
         }
 
-        Write-Verbose "[$((Get-Date).TimeofDay) PROCESS] Setting metadata"
+        Write-Verbose "[$((Get-Date).TimeOfDay) PROCESS] Setting metadata"
         $new.metadata = $metadata
         $new
 
     } #process
     End {
-        Write-Verbose "[$((Get-Date).TimeofDay) END    ] Ending $($myinvocation.mycommand)"
+        Write-Verbose "[$((Get-Date).TimeOfDay) END    ] Ending $($MyInvocation.MyCommand)"
     } #end
 }

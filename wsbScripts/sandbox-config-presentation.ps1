@@ -5,8 +5,8 @@ $SetupPath = "C:\scripts\wsbScripts"
 #create a log file of the configuration process.
 Function log {
     Param(
-        [string]$msg,
-        [string]$log = "C:\work\wsblog.txt"
+        [String]$msg,
+        [String]$log = "C:\work\wsblog.txt"
     )
 
     "[{0}] {1}" -f (Get-Date), $msg | Out-File -FilePath $log -Encoding ascii -Append
@@ -17,7 +17,7 @@ Install-Module PackageManagement, PowerShellGet -Force
 
 #run updates and installs in the background
 log "Updating Windows PowerShell Help"
-Start-Job { powershell -command { Update-Help -Force } }
+Start-Job { PowerShell -command { Update-Help -Force } }
 log "Installing default modules: PSScriptTools, PSTypeExtensionTools,PSTeachingTools, BurntToast"
 Start-Job { Install-Module PSScriptTools, PSTeachingTools, PSTypeExtensionTools, BurntToast -Force }
 log "Installing PSReleaseTools and PowerShell 7 + Preview"
@@ -41,8 +41,8 @@ log "Installing Applications"
 Start-Job {
     Function log {
         Param(
-            [string]$msg,
-            [string]$log = "C:\work\wsblog.txt"
+            [String]$msg,
+            [String]$log = "C:\work\wsblog.txt"
         )
 
         "[{0}] {1}" -f (Get-Date), $msg | Out-File -FilePath $log -Encoding ascii -Append
@@ -55,9 +55,9 @@ Start-Job {
         log "Installing VSCode"
         winget install Microsoft.visualStudioCode
         log "Configuring VSCode"
-        &'C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd' --install-extension ms-vscode.powershell
+        &'C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd' --install-extension ms-vscode.PowerShell
         &'C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd' --install-extension CoenraadS.bracket-pair-colorizer-2
-        &'C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd' --install-extension TylerLeonhardt.vscode-inline-values-powershell
+        &'C:\Users\WDAGUtilityAccount\AppData\Local\Programs\Microsoft VS Code\bin\code.cmd' --install-extension TylerLeonhardt.vscode-inline-values-PowerShell
         Copy-item -path C:\shared\vscode-settings.json -Destination "c:\Users\WDAGUtilityAccount\AppData\Roaming\Code\User\settings.json"
 
         Log "Installing Edge"
